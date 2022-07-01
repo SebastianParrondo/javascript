@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD API REST AJAX</title>
+</head>
+<body>
+    <H1>CRUD API REST AJAX</H1>
+    <article class="crud">
+        <h2 class="crud-title">Agregar Equipos</h2>
+        <form class="crud-form">
+            <input type="text" name="nombre" placeholder="nombre" required>
+            <br>
+            <input type="text" name="ciudad" placeholder="ciudad" required>
+            <br>
+            <input type="submit" value="enviar">
+            <input type="hidden" name="id">   
+        </form>
+    </article>
+    <article>
+        <h2>Equipos</h2>
+        <table class="crud-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Ciudad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>           
+        </table>
+    </article>
+    <template id="crud-template">
+        <tr>
+            <td class="name"></td>
+            <td class="city"></td>
+            <td>
+                <button class="edit">Editar</button>
+                <button class="delete">Eliminar</button>
+            </td>
+        </tr>
+    </template>
+    <script>
+        
+        const d = document,
+        $table = d.querySelector(".crud-table"),
+        $form = d.querySelector(".crud-form"),
+        $title = d.querySelector(".crud-title"),
+        $template = d.getElementById("crud-template").content,
+        $fragment = d.createDocumentFragment();
+
+        
+        const ajax = (options) =>{
+            let {url, method, success, error, data} = options
+            const xhr = new XMLHttpRequest();
+            
+            xhr.addEventListener("readystatechange", (e)=>{
+            if(xhr.readyState !== 4) return;
+            
+            if(xhr.status >= 200 && xhr.status <= 300){
+                let json = JSON.parse(xhr.responseText);
+                success(json);
+            }else{
+                let message = xhr.statusText || "Ocurrió un error";
+                error(`Error ${xhr.status}: ${message}`);
+            }
+        })
+        xhr.open(method || "GET", url);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.send(JSON.stringify(data));
+
+        }
+
+        const getAll = () =>{ 
+            ajax({                
+                url:"http://localhost:5555/clubes_Argentinos",
+                success:(res) =>{
+                    console.log(res)
+                    res.forEach((el)=>{
+                        $template.querySelector(".name").textContent = el.nombre;
+                        $template.querySelector(".city").textContent = el.ubicacion;
+                        $template.querySelector(".edit").dataset.id = el.id;
+                        $template.querySelector(".edit").dataset.name = el.nombre;
+                        $template.querySelector(".edit").dataset.city = el.ubicacion;
+                        $template.querySelector(".delete").dataset.id = el.id;
+                        
+                        const $clone = d.importNode($template, true);
+                        $fragment.appendChild($clone);
+
+                    })
+
+                    $table.querySelector("tbody").appendChild($fragment);
+                },
+                error:(err) =>{
+                    console.error(err);
+                    $table.insertAdjacentHTML("afterend", `<p><b>${err}</b></p>`)
+                },
+            })
+        };
+      
+        d.addEventListener("DOMContentLoaded", getAll());
+        
+        d.addEventListener("submit", (e)=>{
+            if(e.target === $form){
+                e.preventDefault();
+                if(!e.target.id.value){
+                    //post
+                    ajax({
+                        url:"http://localhost:5555/clubes_argentinos",
+                        method: "POST",
+                        success: (res)=>location.reload(),
+                        error:(err) =>{
+                            $form.insertAdjacentHTML("afterend", `<p><b>${err}</b></p>`)
+                        },
+                        data: {
+                            "nombre": e.target.nombre.value,
+                            "ubicacion": e.target.ciudad.value
+                        }
+                    })
+
+                }else{
+                    //put
+                    ajax({
+                        url:`http://localhost:5555/clubes_Argentinos/${e.target.id.value}`,
+                        method: "PUT",
+                        success: (res)=>{
+                            location.reload()
+                            $title.textContent = "Agregar Equipos"
+                        },
+                        error:(err) =>{
+                            $form.insertAdjacentHTML("afterend", `<p><b>${err}</b></p>`)
+                        },
+                        data: {
+                            "nombre": e.target.nombre.value,
+                            "ubicacion": e.target.ciudad.value
+                        }
+                    })
+                }
+            }
+        })
+        
+        d.addEventListener("click", (e) =>{
+            if(e.target.matches(".edit")){
+                $title.textContent = "Editar Club";
+                $form.nombre.value = e.target.dataset.name;
+                $form.ciudad.value = e.target.dataset.city;
+                $form.id.value = e.target.dataset.id;
+                
+            }
+            if(e.target.matches(".delete")){
+                ajax({
+                    url:`http://localhost:5555/clubes_Argentinos/${e.target.dataset.id}`,
+                    method: "DELETE",
+                    success: (res) => location.reload(),
+                    error: (err) =>{
+                        $form.insertAdjacentHTML("afterend", `<p><b>${err}</b></p>`)
+                    }
+                })
+            }
+        })
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "clubes_Argentinos": [
+    {
+      "id": 1,
+      "nombre": "River",
+      "ubicacion": "Nuñez"
+    },
+    {
+      "id": 2,
+      "nombre": "Boca",
+      "ubicacion": "La Boca"
+    },
+    {
+      "id": 3,
+      "nombre": "Racing",
+      "ubicacion": "Avellaneda"
+    },
+    {
+      "id": 4,
+      "nombre": "Independiente",
+      "ubicacion": "Avellaneda"
+    },
+    {
+      "id": 5,
+      "nombre": "San Lorenzo",
+      "ubicacion": "Boedo"
+    },
+    {
+      "nombre": "Argentinos Juniors",
+      "ubicacion": "La Paternal",
+      "id": 6
+    }
+  ],
+  "clubes_Internacionales": [
+    {
+      "id": 1,
+      "nombre": "Barcelona",
+      "ubicacion": "Barcelona"
+    },
+    {
+      "id": 2,
+      "nombre": "Real Madrid",
+      "ubicacion": "Madrid"
+    },
+    {
+      "id": 3,
+      "nombre": "Valencia",
+      "ubicacion": "Valencia"
+    },
+    {
+      "id": 4,
+      "nombre": "Nacional",
+      "ubicacion": "Montevideo"
+    },
+    {
+      "id": 5,
+      "nombre": "Plaza Colonia",
+      "ubicacion": "Colonia del Sacramento"
+    }
+  ]
+}

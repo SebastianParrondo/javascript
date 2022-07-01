@@ -1,0 +1,583 @@
+🔸📝❌📌
+📝Variables
+    Para declarar una cariable en Javascript debemos usar las siguientes palabras claves
+    🔸Var: Declara que la variable tiene un alcance global. 
+    🔸Let: Declara que la variable tiene un alcance local.
+    🔸Const: Tienen el mismo comportamiento que las variables declaradas con let excepto que su valor no se puede reasignar. Si un arreglo es declarado con este tipo de variable, el objeto nunca dejara de ser un arreglo pero si se puede cambiar los objetos que contenga.
+
+    Para mantener protegido los valores contenidos dentro de un arreglo declarado con const hay un metodo que lo hace:
+    🔸Object.freeze(el-objeto-a-proteger) 
+
+    --> Tipos de variables
+        Javascript es un lenguaje de tipado debil por lo que no hace falta al momento de declarar una variable decir que tipo de elemento almacenara. Las variables pueden ser:
+         
+         📌number
+         📌string
+         📌boolean
+         📌object
+         📌undefined --> Valor por defecto que tienen las variables cuando son declaradas pero no inicializadas. 
+         📌null
+         📌symbol
+         📌bigint
+    
+    -->Sencibilidad de Mayusculas
+        En JavaScript todas las variables y nombres de función son sensibles a mayúsculas y minúsculas. Esto significa que la capitalización importa.  
+        
+        🔸camelCase: los nombres de variables de múltiples palabras tienen la primera palabra en minúsculas y la primera letra de cada palabra posterior en mayúsculas.
+📝Operadores Matemticos
+    Estas operadores se utilizan para hacer operaciones matematicas entre variables numericas
+    🔸= --> asignación
+    🔸+ --> suma
+    🔸- --> resta
+    🔸* --> producto
+    🔸/ --> cociente
+    🔸% --> modulo (resto de una divicion)
+
+    Los operadores se pueden combinar de la siguiente manera
+    
+    🔸var++ -->suma una unidad al valor contenido en la variable
+    🔸var-- -->resta una unidad al valor contenido en la variable
+    🔸var += num --> suma el valor de sum a var.
+    🔸var -= num --> resta el valor de sum a var.
+    🔸var *= num --> multiplica el valor de sum a var.
+    🔸var /= num --> divide el valor de sum a var.
+
+    Otras utilidades
+
+    El signo " + " sirve para concatenar objetos de tipo string
+📝Operadores de comparacion
+    🔸== Devuelve true si los operandos son iguales. 
+    🔸!= Devuelve true si los operandos no son iguales.
+    🔸=== Devuelve true si los operandos son iguales y del mismo tipo.
+📝JSON
+    JavaScript Object Notation, es un formato ligero de intercambio de datos. Leerlo y escribirlo es simple para humanos, mientras que para las máquinas es fácil de interpretar y generar. Todos los lenguajes de programación lo soportan.
+    
+    Su sintaxis es:
+        🔸Los datos se encuentran en pares de nombre / valor.
+        🔸Los datos están separados por comas.
+        🔸Las llaves {} contienen objetos.
+        🔸Los corchetes [] contienen arreglos.
+        🔸Los datos tienen un nombre y un valor.
+        🔸Los datos se escriben como pares de nombre / valor "nombre" : "valor".
+
+    Valores que soporta:
+        🔸Una cadena (entre comillas dobles).
+        🔸Un booleano (verdadero o falso).
+        🔸Un arreglo (entre corchetes).
+        🔸Un objeto (entre llaves).
+        🔸Un valor nulo (null).
+
+    Métodos
+        📌JSON.parse(): Analiza una notación JSON y la convierte en un tipo de dato JS.
+        📌JSON.stringify(): Convierte un tipo de dato JS a notación JSON.
+📝ASINCRONIA
+   🔸Callback
+   🔸Promise
+      El concepto de promesa lo podemos transpolar al de un condicional if - else. Esta herramienta se utiliza cuando queremos acceder a un recurso haciendo una peticion a una API o si se realiza el proceso que estamos pretendiendo. En el caso de acceder tendra un tipo de comportamiento y en el caso de que no sea posible el acceso se podra atrapar el error y actuar de otra manera. 
+
+      Para hacer uso de una promesa primero hay que instanciarla, por parametro vamos a pasar una funcion donde declaramos el comportamiento que va a tener la promesa. Los parametros son:
+       📌resolve --> Es la respuesta positiva de la promesa y la vamos a capturar con el metodo .then()
+       📌reject --> Es la respuesta negativa y la vamos a atrapar con el metodo .catch()
+
+     A modo de ejemplo dejo una funcion que retorna una promesa y con los metodos .then() y .catch() se van a atrapar las respuestas positivas o los errores de la promesa.
+        
+        FUNCION QUE RETORNA UNA PROMESA; CASO POSITIVO RETORNA UN OBJETO Y CASO NEGATIVO UN MENSAJE
+        // 
+        function cuadradoPromise(value){
+                return new Promise((resolve, reject)=>{
+                    if(typeof value !== "number") reject(`El valor ${value} no es válido`) 
+                    setTimeout(() => {
+                        resolve({
+                            valor: value,
+                            resultado: value * value
+                        })
+                    }, 0|Math.random() * 1000);
+                })
+            } 
+        //
+
+        USAMOS .then() Y .catch() PARA ATRAPAR Y MANIPULAR EL RETORNO.
+        --> Tanco con .then() como con .catch() le pasamos por parameto una funcion en la cual defnimos que queremos hacer con el valor retornado.
+        
+        // 
+            cuadradoPromise(0)
+                .then(obj=>{
+                    console.log(`Inicio de Promise`)
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+                    return cuadradoPromise(1);
+                })
+                .then(obj=>{
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+                    return cuadradoPromise(2);
+                })
+                .then(obj=>{
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+                    return cuadradoPromise(3);
+                })
+                .then(obj=>{
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+                    return cuadradoPromise("z");
+                })
+                .then(obj=>{
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+                    return cuadradoPromise(5);
+                })
+                .then(obj=>{
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+                    console.log("Fin del Promise")
+                })
+                .catch(err=> console.error(err));
+        //
+   🔸Async-Await
+        Las funciones asincronas van a espera a que algo se cumpla para seguir ejecutando el codigo. Para declarar que una funcion es asincrona hacemos uso de la palabra reservada "async"
+
+        // async function calcularCuadradoConAsync() {} //
+
+        Las funciones async utilizan la palabra await para indicar que un proceso debe finalizarse para continuar ejecutando, de esta manera se maneja la asincronia cuando hacemos una consulta a una api o una base de datos. Para manejar los errores se hace uso de un try-catch. Para ejemplificar su uso seguimos con el ejemplo calcularCuadrado (archivo prueba - folder ajax).
+
+        📌Funcion que origina el calculo
+        
+        // 
+            function cuadradoPromise(value){
+                return new Promise((resolve, reject)=>{
+                if(typeof value !== "number") reject(`El valor ${value} no es válido`)
+                    setTimeout(() => {
+                        resolve({
+                        valor: value,
+                        resultado: value * value
+                        })
+                    }, 0|Math.random() * 1000);
+                })
+            }
+        //        
+        
+        📌Funcion asincrona expresada
+        // 
+        async function funcionAsincronaExpresada(){
+            try{
+                console.log(`Comienso de la funcion Async`)
+
+                let obj =  await cuadradoPromise(0);
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+        
+                obj = await cuadradoPromise(1);
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+        
+                obj = await cuadradoPromise(2);
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+
+                obj = await cuadradoPromise(3);
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+
+                obj = await cuadradoPromise("4");
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+
+                obj = await cuadradoPromise(5);
+                    console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+
+                console.log(`Fin de la funcion Async`)
+            }catch(err){
+                console.error(err)
+            }
+        }
+
+        funcionAsincronaExpresada();
+        //
+        
+        📌Funcion asincrona declarada
+        // 
+            const funcionAsincronaDeclarada = async() =>{
+                try{
+                    console.log(`Comienso de la funcion Async`)
+
+                    let obj =  await cuadradoPromise(6);
+                        console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+        
+                    obj = await cuadradoPromise(7);
+                        console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+        
+                    obj = await cuadradoPromise(8);
+                        console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+
+                    obj = await cuadradoPromise(9);
+                        console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+
+                    obj = await cuadradoPromise(10);
+                        console.log(`Promise: ${obj.valor}, ${obj.resultado}`)
+
+                    console.log(`Fin de la funcion Async`)
+                }catch(err){
+                    console.error(err)
+                }
+            }
+
+            funcionAsincronaDeclarada();
+        //
+📝Dom
+    🔸Nodos, elementos y selectores
+        Los siguientes son metodos que recuperan elementos html pero que ya no se utilizan.
+
+        📌document.getElementsByTagName("li") --> entre parentesis se indiqua al tipo de elemento que queremos seleccionar.
+        📌document.getElementsByClassName("card")
+        📌document.getElementsByName("nombre")
+
+        -----Metodos utilizados-----
+        📌document.getElementById("idmenu") --> devuelve etiqueta html
+        📌document.getElementById("idmenu").content --> devuelve el contenido etiqueta html
+
+        📌document.querySelector(".card") --> devuelve al primer elemento que tenga la clase declarada y devuelve la etiqueta html
+        📌document.querySelectorAll(".card") --> devuelve todos los elementos que tengan la clase declarada y devuelve un nodelist. Acepta metodos de array como length (devuelve cantidad de elemento que tiene la clase declarada). Con notacion de corchetes podemos acceder a un elemento en particular segun su posicion. 
+
+    🔸Atributos y Data-attributes
+        Es posible acceder a todos los atributos de un elemento e interactuar con ellos. Para ello se puede hacer por medio de la notacion del punto:
+            📌document.documentElement --> esto devuelve todos los nodos que contiene la etiqueta HTML
+            📌document.documentElement.lang --> devuelve el valor del atributo lang
+        El metodo del punto puede no ser 100% efectiva al momento de devolver valores de atributos. Es por eso que se recomienda utilizar el metodo getAttribute
+            📌document.documentElement.getAttribute("lang")
+        
+        Para manipular elemento es posible hacerlo de la siguiente manera
+
+        documentElement.getAttribute("lang") = "en" --> declaramos que el lenguaje de la pagina es en ingles
+
+        Otra forma es guardar el elemento en una variable y recien ahi manipular su valor:
+
+        let $lang = ducument.documentElement.getAttribute("lang");
+        $lang = "es"; --> cambiamos el lenguaje de la pagina a español.
+
+        Lo recomendable es utilisar el metodo setAttribute(elemento, valor)
+
+        document.documentElement.setAttribute("lang", "es")
+
+        No solo es posible recuperar valores de un atributo, tambien podemos agegar atributos y valores a los elementos. Supongamos que tenemos una etiqueta <a> con la clase "class-js"le podemos agregar el atributo href y la direccion a donde queremos que se redireccione el link
+
+        const $link_prueba = document.querySelector(".link-dom");
+        $link_prueba.setAttribute("href", "https://www.youtube.com/");
+        $link_prueba.setAttribute("target", "_blank")
+
+        Otros metodos
+
+        📌$link_prueba.hasAttribute("atributo") --> devuelve un booleano respondiendo si la etiqueta tiene ese atributo
+        📌$link_prueba.removeAttribute("atributo") --> Elimina el atributo que tenga la etiqueta
+
+                                                //-----DATA-ATRIBUTES-----//
+        Los data-atributes son atributos que podemos crear y agregarlos a una etiqueta HTML. Para hacerlo si o si se debe declara anteponiendo la palabra data. Cada data-atributo que creemos se va a guardar en un elemento map. Si queremos acceder a uno por medio de la notacion del punto vamos a tener que hacer uso de dataSet que nos devuelve un map con todos los elementos datas-attribute que tenga la etiqueta seleccionada.
+
+        console.log(document.querySelector(".link-dom").dataset.description); --> accedi al valor guardado en el data-description que se encuentra en la etiqueta que tiene la clase link-dom
+
+        const $link_prueba = document.querySelector(".link-dom")
+        const $link_prueba.dataset.description = "otro valor" --> modifique el valor al data-atributo con notacion de punto
+        const $link_prueba.setAttribute("data-description", "nuevo valor") --> modifique el valor al data-atributo con metodo setAttribute
+
+    🔸Estilos y variables class
+        ❗Partiendo de la base de que al elemento con el que vamos a trabajar lo recuperamos a travez de querySelector(".nameClass") y lo almacenamos en una variable que nombraremos $linkDOM
+
+        Podemos acceder a las variables Css que tiene un elemento HTMl de dos maneras
+
+        --> Por el metodo .style
+        
+            $linkDOM.style --> nos devuelve un objeto con todos los estilos Css. Las que hayamos declarado figuraran con el valor definido, el resto no tendra ningun valor.
+        
+        --> Por el metodo getAttribute
+        
+            $linkDOM.style("style") --> nos devuelve los estilos que hayamos definodo como String.
+        
+        --> Por el método getComputedStyle
+            Para acceder a los estilos por intermedio de este metodo lo haremos a traves del objeto windows y por parametro pasamos el elemento puntual al cual querramos saber el estado de sus estilos Css
+        
+            windows.getComputedStyle($linkDOM) --> Devuelve un listado ordenado por un indice de todos los estilos css. Los que hayamos manipulado tendran el valo que le definimos y el resto tendra el valor por defecto.
+
+            ❗Los metodos que cuelgan de windows para llamarlos no es necesario anteponer el elemeto windows
+
+            getComputedStyle($linkDOM)
+
+            Si queremos acceder a un estilo detemonado lo hacemos con el metodo getPropertyValue("nombre-del-estilo")
+
+            getComputedStyle($linkDOM).getPropertyValue("Color")
+
+        //----------------------------------------------------------------------------------------//
+
+        Para modificar el valor de los estilos lo podemos hacer por medio de:
+
+        --> La notacion del punto
+        
+        $linkDOM.style.color = red --> definimos el valo rojo a la variable Css color.
+
+        --> El metodo setProperty("estilo", "valor")
+
+        $linkDOM.style.setProperty("background", "#222") --> definimos el coler de fondo.
+
+    🔸Clases Css
+        Para acceder a la cadena de texto que tiene el atributo class en una etiqueta HTML con los metodos:
+
+        -->className
+            Este metodo devuelve una cadena con el nombre de las clases que tiene el elemento en cuestión.
+        -->classList
+            Esta metodo nos devuelve un arreglo en el que en cada una de las posiciones cada una de las clases que tenga el elemto en cuestión
+
+        Existen metodos que nos van ayudar a trabajar con atributos HTML del tipo class
+        
+            📌$linkDOM.classList.contains("nombreClase") --> nos devuelve un boolean dependiendo de si el atributo class contiene a nombreClase
+            
+            📌$linkDOM.classList.add("nombreClase") --> nos permite agregar una la clase nombreClase al atributo class del elemento apuntado en la variable $linkDOM. Si queremos agregar mas de una clase se puede hacer declarandola como parametro separand cada parametro con una coma.
+            
+            📌$linkDOM.classList.remove("nombreClase") --> quita la clase nombreClase del atriburo class.
+            
+            📌$linkDOM.classList.toggle("nombreClase") --> funciona como interruptor si el atributo class tiene como valor a la clase nombreClase este metodo la quita. Pero si no lo tiene lo agrega.
+            
+            📌$linkDOM.classList.replace("nombreClase", "nombreClase2") --> Remplaza el primer parametro por el segundo.
+
+    🔸Texto y HTML
+
+        Estos metodos nos permiten incertar texto dentro de etiquetas html
+             📌$linkDOM.textContent = variable_que_contiene_texto --> Este método agrega el texto a la etiqueta señalada tal cual este escrito. Si el texto tiene etiquetas HTML estas no seran tenidas en cuenta.
+             📌$linkDOM.InnerHTML = variable_que_contiene_texto --> Este método agrega el el texto y reconoce el contenido HTML
+             📌$linkDOM.outerHTML = variable_que_contiene_texto --> Este método elimina la etiqueta señalada y lo remplaza por el contenido agregado en la variable texto. (reconoce contenido HTML).
+             📌document.createTextNode("texto") --> este método crea un nodo de texto el cual se le puede agregar a una etiqueta HTML.  
+
+    🔸Travesing - Recorriendo el DOM
+        Estos metodos nos va a permitir recorree los elementos que estan dentro de una etiqueta padre.
+
+            📌$linkDOM.children --> devuelve un coleccion de elementos HTML que son todas las etiquetas que esten dentro del elemeno padre apuntado por la variable $linkDOM.
+            📌$linkDOM.children[5] --> Podemos recorrer cada uno de los elementos contenidos con la notacion de corchete.
+            📌$linkDOM.firstElementChildren --> Devuelve el primer elemento hijo.
+            📌$linkDOM.lastElementChildren --> Devuelve el ultimo elemento hijo.
+            📌$linkDOM.parentElement --> Devuelve la etiqueta padre del objeto apuntado.
+            📌$linkDOM.previousElementSibling --> Devuelve la etiqueta exactamente anterior al elemento apuntado.
+            📌$linkDOM.previousElementSibling --> Devuelve la etiqueta exactamente posterior al elemento apuntado.
+            📌$linkDOM.closest("selector") --> Devuelve el padre mas cercano del tipo de selector que pasemos por parámetro.
+
+    🔸Creando elementos y fragmentos
+        Estos métodos permiten crear y agregar elementos al DOM.
+
+            📌document.createElement("etiqueta") --> Crea un elemento HTML dinamicamente.
+            📌$linkDOM.addChild --> Agrega un elemento hijo al elemento padre apuntado en la variable $linkDOM
+
+        Para mejorar el rendimiento de nuestra pagina al momento de agregar al DOM muchos elementos de manera dinamica lo que se hace es crear un fragmento al cual se le agregan a todos los elementos (nodos) nuevos y una vez todos creados se le agregan al DOM. Esto mejora el rendimiento porque el DON solo recibe una inserción y no tantas incerciones como elementos querramos agregar.  
+            📌document.createDocumentFragment() --> Este método crea un Fragmento que sirve como una variable para almacenar elementos HTML al momento de crearlos dinamicamente.
+
+    🔸Template
+        La etiqueta <template> es un modelo a seguir en el cual se estructua el contenido HTML que a traves de JavaScript se convierte en dinamico. Haciendo un paralelismo con POO la etiqueta template seria como una clase, la cual nos serve de modelo para crear estructuras a partir de ella. Ver clase N°69 de Jon Mircha 
+
+    🔸Modificando elementos (Estilo viejo)
+        Estos metodos nos permiten agregar elementos de manera dinamica al DOM.
+
+        $linkDOM = elemento de referencia. Es el elemento padre, el que contiene los elemento que queremos manipular o al que le queremos agregar cosas.
+
+        📌$linkDOM.replacechild("nuevo_elemento", "viejo_elemento") --> Este metodo remplaza el elemento nuevo por el elemento vieja declarado por parametro. Haciendo uso de los metodos de Travesing puedo remplazar un elemento concreto.
+        📌$linkDOM.insertBefore("nuevo_elemento", "elemento_referencia") --> este metodo inserta un nuevo elemento antes del elemento referencia que le pasemos por parametro.
+        📌$linkDOM.remove("elemento_a_eliminar") --> esta clase elimina el elemnto declarado.
+
+        Se puede clonar una estructura dinamica completa para ello vamos ausar el metodo cloneNode
+
+        📌$linkDOM.cloneNode(boolean) --> Esta clase clona al elemento al que estoy apuntando. Si por parametro no paso nada o el boolean false solo se clona las etiquetas con sus atributos de la clase padre apuntada. Si por parametro paso true se clona toda la estructura.  
+
+    🔸Modificando elementos (Estilo nuevos)
+        Nuevos metodos para agregar elementos al DOM 
+        $linkDOM --> recordemos que esta variable es la que contiene el elemento de referencia.
+
+        --> .insertAdjasent...
+            📌.insertAdjasentElement(position, elemento) --> Inserta elemento (etiqueta HTML) en la posición que le  indiquemos
+            📌.insertAdjasentHTML(position, HTML) --> Inserta codigo HTML n la posición que le indiquemos
+            📌.insertAdjasentText(positon, text) --> Inserta texto en la posición que le iniquemos.
+        
+        --> Position
+            beforebegin(hermano anterior)
+            afterbegin(primer hijo)
+            beeforeend(ultimo hijo)
+            afterend(Hermano siguiente)    
+
+    🔸Manejador de evento
+        Este método permite capturar un evento (accion del usuario con la pagina como por ejemplo un click sobre un elemento) y a partir de esa captura hacer que pase algo.
+
+            📌$linkDOM.addEventListener("evento", "accion_a_suceder")
+        
+        Las acciones que queremos hacer por lo general son funciones. Hay que tener en cuenta que estas funciones no pueden recibir parametros. Pasa solucionar este problema lo que se hace es que la funcion que pasemos como accion de un evento sea una arrow function y al contenido de esta sea la funcion en cuestion. De esta forma si podemos pasar marametros sin inconvenientes
+
+        --> ejemplo
+
+            function saludar(nombre = "Desconoci@"){
+                alert(`Hola ${nombre}`)
+            }
+
+            const $linkDom = document.getElementById("evento-multiple");
+
+            $linkDom.addEventListener("click",(e)=>{
+                saludar();
+                saludar("Sebastián");
+                console.log(e);
+            })
+
+     🔸       
+            
+    🔸Flujo de evento
+        ver clase 74 de JonMircha
+
+    🔸stopPropagation & preventDefault
+        Estos son metodos propios del elemento event. Ver clase N°75 de JonMircha
+
+    🔸Delegación de eventos
+        Ver clas N°76 JonMircha   
+📝AJAX
+    🔸Objeto XMLHttpRequest
+        Para hacer una peticion con XMLHttpRequest debemos cumplir los siguietes 4 pasos:
+
+        Paso 1 -> Intanciar el obj XMLHttpRequest
+            📌// const xhr = new XMLHttpRequest() //
+
+        Paso 2 -> Asignar un evento
+            readystatechange: Captura el evento cuando se detecte cualquier cambio de estado
+            📌// xhr.addEventListener("readystatechange", (e)=>{}) //
+
+        Paso 3 -> Abrir la petición con .open()
+            Como primer parametro se pasa en metodo (GET, POST, PUT), como segundo parametro la URL a la cual le haremos la petición
+
+            📌// xhr.open("GET","https://jsonplaceholder.typicode.com/users") //
+
+        Paso 4 -> Enviar la petición al DOM
+
+            📌// xhr.send(); //
+
+        Para tabajar con peticiones XMLHttpRequest, siempre hay que validad que el estado de la misma sea complete. Para esto vamos a validar con un condicional y con el atributo del objeto XMLHttpRequest readyState.
+
+            📌// if(xhr.readyState !== 4) return // -->Con esta validacion decimos que si la propiedad readyState del objeto XMLHttpRequest no es igual a cuatro finalcemos la petición
+        
+        Tambien debemos validar el estado de respuesta:
+            
+            📌// if(xhr.status >= 200 && xhr.status <= 300){ --> validamos que nos de respuestas unicamente satisfactorias
+                console.log("exito")
+            }else{
+                console.log("error") 
+            } //
+    🔸Método fetch()
+        El metodo fetch proporciona una interfaz para recuperar recursos. Este metodo nos retorna una promesa, por lo tanto debemos trabajar con .then(), .catch() y .finally(). 
+
+            Paso 1 --> Pasamos por parametro del elemento fetch la ubicacion del recurso que queremos recuperar.
+                📌// fetch("recursoAConsular").then().catch() //
+        
+        Response nos devuelve un objeto con distintos atributos:
+            --> Body: trae el contenido en un formato ReadableStream
+            --> ok: devuelve un booleano que confirma si el estado de la consulta es correcto o no.
+            --> statu: devuelve el codigo del status.
+            --> statusText: devuelve el texto relacionado al status de la petición.
+
+            Paso 2 --> En un primer .then() validamos que el status de la respuesta. Si el status es positivo convertimos el contenido del body a un tipo JSON con el método .json() y lo capturamos en un nuevo .then(), si es negativo lo capturamos en el .catch().
+                📌// 
+                    fetch("recursoAConsular")
+                      .then((respuesta) => respuesta.ok? respuesta.json(): Promise.reject(respuesta))
+                      .then(resPositive=>{
+                          manipulamos la espuesta positiva
+                      })
+                      .catch(resNegativa=>{
+                          manipulamos la respuesta negativa
+                      })
+                //
+            Paso 3 --> Podemos hacer uso del método .finally() que ejecuara lo que definamos alli independientemente del tipo de respuesta.
+                📌// 
+                    fetch("recursoAConsular")
+                      .then((respuesta) => respuesta.ok? respuesta.json(): Promise.reject(respuesta))
+                      .then(resPositive=>{
+                          manipulamos la espuesta positiva
+                      })
+                      .catch(resNegativa=>{
+                          manipulamos la respuesta negativa
+                      })
+                      .finally(()=>{
+                          Esto se ejecutara independientemente del resultado de la promesa Fetch
+                      });
+                //
+    🔸Método fetch con async-Await
+        Esta metodologia nos permite trabajas las consultas realizadas con fetch() con funciones asincronicas, de esta manera se logra se logra tener un codigo mas facil de leer (elegante).
+
+        Paso 1 --> Lo primero es hacer la consulta con fetch() dentro de una funcion asincrona. con su respectiva estructura de manejo de errores. Almacenamos la respuesta en una variable. para luego convertir esa respuesta en un obj json con el método .json()(recordemos que tembien lo podemos estraer un texto con el método .text). La palabra await no permite que el flujo continue hasta que no conplete la respuesta y el recuperracion de un objeto json.
+
+        📌// 
+            async function devolverInformacion(){
+                try{
+                    const respuesta = await fetch(`direccion a la que queremos consultar`),
+                    json = await respuesta.json();
+                }catch(err){
+
+                }finally{
+
+                }
+            }
+         //
+
+        Paso 2 --> Una ves que la respuesta a la consulta fue entregada y se extrajo el del cuerpo el objeto json el flujo continua. Lo primero que hacemos es manejar el error, si el atributo ok es falso quiere decir que la coneccion con la API a consultar no fue posible por lo tanto debe salir por catch con un mensaje de error, usamos la palabra throw que envia el flujo diectamente al catch.
+
+        📌// 
+            async function devolverInformacion(){
+                try{
+                    const respuesta = await fetch(`direccion a la que queremos consultar`),
+                    json = await respuesta.json();
+
+                    if(!respuesta.ok){
+                        throw `Info que se envia al catch para manejar el error desde ahí`
+                    }
+                }catch(err){
+                    `Manejamos el mensaje de error desde aqui!!`
+                }finally{
+
+                }
+            }
+         //
+
+         Paso 3 --> Una vez manejado el error definimos la programación que necesitemos y podemos enviar un mensaje por finally que se enviara independientemente de si flujo salio por try o carch.
+
+         📌// 
+            async function devolverInformacion(){
+                try{
+                    const respuesta = await fetch(`direccion a la que queremos consultar`),
+                    json = await respuesta.json();
+
+                    if(!respuesta.ok){
+                        throw `Info que se envia al catch para manejar el error desde ahí`
+                    }
+
+                    `codigo para manipular la respuesta recibida por la API`
+
+                }catch(err){
+                    `Manejamos el mensaje de error desde aqui!!`
+                }finally{
+                    `Esto se ejecutara independientemente del resultado del try-catch`
+                }
+            }
+         //
+    🔸Libreria Axios
+        Axios es una libreria externa a JavaScript que esta basada en promesas  que es util a la hora de hacer peticiones Ajax.
+
+        axios.get(dirección) --> Con este método hacemos la peticion a una API que le indicamos la direccion por parametro. Este método devuelve una promesa que la podemos trabajar como tal o con una funcion aincronica (async-await). Esta libreria uno de los beneficios que tiene es que no necesitamos validar los errores ya que de manera nativa lo hace simplemente los manejasmos desde sus respectivos catch().
+
+        📌// 
+            const $axios = document.getElementById("axios"),
+            $fragment = document.createDocumentFragment();
+
+            axios
+            .get("https://jsonplaceholder.typicode.com/users")
+            .then(respuesta =>{ 
+                let json = respuesta.data; 
+      
+                json.forEach(obj =>{
+                    const $li = document.createElement("li");
+                    $li.innerHTML = `${obj.name} -- ${obj.email} -- ${obj.phone}`;
+                    $fragment.appendChild($li);
+                })
+                $axios.appendChild($fragment)
+            })
+            .catch(error =>{
+                const err = error.response;
+                let message = err.statusText || `Ocurrió un error`;
+                $axios.innerHTML = `Error ${err.status}: ${message}`
+            })
+            .finally(() =>{
+                console.log(`Esto se ejecutara independientemente del resultado del try-catch desde Axios`)
+            });
+            })();
+        //
+📝API Rest
+    
+
+
+         
+
+

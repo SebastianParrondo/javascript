@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas Javascript</title>
+</head>
+<body>
+    <H1>Hola mundo</H1>
+    <BUtton type="button" class="btn-js" >Pregunta muy importante</BUtton>
+    
+    
+    <script>
+        //------Ejercicio N°1------//
+        /*function contarCaracteres(palabra){
+            let letras
+            if(typeof palabra === "string"){
+                letras = palabra.length
+            }else{
+                return "El parametro ingresado no es un String"
+            }
+            return letras
+        }
+        let silvia = `Silvia`
+        const carlos = {
+            nombre: `Carlos`,
+            apellido:`Parrondo`
+        }
+        let numero = 25
+        let texto = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa commodi tempora modi, magni hic suscipit sunt ex laboriosam nisi, minima eaque velit totam ducimus! Eos dolorum harum earum adipisci voluptatum!`
+
+        console.log(contarCaracteres(silvia))
+        console.log(contarCaracteres(carlos))
+        console.log(contarCaracteres(numero))
+        console.log(contarCaracteres(texto))*/
+    
+
+
+
+
+        //------Ejercicio N°2------//
+        /*let cadena = "Esto es una cadena";
+     
+        const cortarCadena = (cadena, char) =>{
+            return cadena.substring(0, char);
+        }
+        console.log(cortarCadena(cadena, 7));*/
+
+
+
+
+
+        //------Ejercicio N°3------//
+        /*const cadenaAArreglo = (cadena = "", separador = undefined) =>
+        (!cadena)
+            ? console.warn("No ingresaste una cadena de texto")
+            :(separador === undefined)
+                ? console.warn("No ingresaste un separador")
+                : console.log(cadena.split(separador));
+        
+        
+                cadenaAArreglo("Esto es un texto, y es algo largo", ",")
+                cadenaAArreglo("Esto es un texto, y es algo largo", " ")
+                cadenaAArreglo()
+                cadenaAArreglo("Esto es un texto, y es algo largo")*/
+
+
+
+       
+        //------Ejercicio N°4------//
+
+            //validaciones
+        /*const repetirVeces = (cadena = "", numero = undefined) =>{
+            if(cadena === "") return console.warn("No ingresaste ningun texto");
+
+            if(numero === undefined) return console.warn("No ingresaste el número de veces a repetir el texto");
+
+            if(numero === 0) return console.error("El numero de veces no puede ser 0");
+
+            if(Math.sign(numero) === -1) return console.error("El numero de veces no puede ser un número negativo")
+
+            //cuerpo de la función
+
+            for(let i = 1; i <= numero; i++){
+                console.log(`${cadena}, ${i}`)
+            }
+        }
+
+        repetirVeces("Hola mundo", 3)
+        repetirVeces("Hola mundo", 0)
+        repetirVeces("Hola mundo", -5)
+        repetirVeces("", 3)
+        repetirVeces("Hola mundo")*/
+
+
+
+
+        //------Ejercicio N°5------//
+        /*const invertirPalabra = (palabra = "") =>{
+            (palabra ==="")
+            ?console.warn("Olvidaste ingresar el texto")
+            : (typeof palabra !== "string")
+                ? console.error("El parametro ingresado no es válido")
+                : console.log(palabra.split("").reverse().join(""))
+        }
+        
+        invertirPalabra("hola")
+        invertirPalabra()
+        invertirPalabra(5)
+        invertirPalabra("Puto el que lee")*/
+
+        
+        
+
+
+
+        //------Ejercicio N°6------//
+        /*const contarPalabras = (texto = "", palabra = "") => {
+            if(!texto) return console.warn("No ingresaste un texto")
+
+            if(!palabra) return console.warn("No ingresaste una palabra")
+
+            let i = 0, 
+            contador = 0;
+            while(i !== -1){
+                i = texto.indexOf(palabra, i)
+
+                if(i !== -1){
+                    i++
+                    contador++
+                }
+            }
+            return console.info(`La palabra ${palabra} se repite ${contador} veces`)
+        }
+
+        let texto= " hola como estas, hola mama, hola papa."
+        contarPalabras(texto,"hola")*/
+
+    
+
+           
+
+        //------Ejercicio N°7------//
+   /* const palíndromo = (palabra = "") => {
+        if(palabra ==="") return console.warn("Olvidaste ingresar el texto")
+        if(typeof palabra !== "string") return console.error("El parametro ingresado no es válido")
+        
+        palabra = palabra.toLowerCase()
+        palabraInvertida = palabra.split("").reverse().join("")
+        return console.log(palabra === palabraInvertida )
+            }
+
+    palíndromo("Menem")
+    palíndromo("Ricardo")
+    palíndromo("")
+    palíndromo(3)
+    palíndromo("neuquen")*/
+    
+    
+
+
+
+    //------Ejercicio N°8------//
+
+    /*const remplazar = (texto = "", palabra = "") => {
+        if(!texto) return console.warn("No ingreso el texto a buscar")
+
+        if(typeof texto !== "string") console.error("El valor ingresado no es válido")
+        
+        if(!palabra) return console.warn("No ingreso cadena a quitar")
+
+        return console.log(texto.replace(RegExp(palabra,"ig"),""))        
+    }
+    remplazar("Hola como estas", "hola")*/
+
+
+
+
+
+    //------Ejercicio N°9------//
+    /*const aleatorio =() =>console.log(Math.floor((Math.random() * (600 - 501 + 1)) + 501)) 
+
+    console.log(aleatorio())*/
+
+
+
+
+
+    //------Ejercicio N°10------//
+   /*const capicua = (numero = undefined) =>{
+    if(numero === undefined) return console.warn("Cuidado!! Olvidaste ingresar el numero a evaluar")
+    if(typeof numero !== "number") return console.error("El valor ingresado no es válido")
+    numero = numero.toString()
+    let numeroInvertido = numero.toString().split("").reverse().join("")
+        return (numero === numeroInvertido)
+        ?console.info(`Si es capicua. El numero original es ${numero}. El numero al revez es ${numeroInvertido}`)
+        :console.info(`No es capicua. El numero original es ${numero}. El numero al revez es ${numeroInvertido}`)
+    }
+        
+    capicua(15)
+    capicua(202)
+    capicua()
+    capicua("15")*/
+
+
+
+
+
+    //------Ejercicio N°11------//
+    /*const factorial = (numero = undefined) =>{
+    if(numero === undefined) return console.warn("Cuidado!! Olvidaste ingresar el numero a evaluar")
+    if(typeof numero !== "number") return console.error("El valor ingresado no es válido")
+    if(numero === 0) return console.info(`El resultado de factorizar el numero ${numero} es 1`)
+    if(Math.sign(numero) === -1) return console.error("El numero no puede ser negativo")
+    let r = 1;
+    for(let i = numero; i > 0; i--){
+        r *= i
+    }
+    return console.log(`El resultado de factorizar el numero ${numero} es ${r}`)
+    } 
+    
+    factorial(5);
+    factorial();
+    factorial("pedro") 
+    factorial(0) 
+    factorial(-15)*/ 
+
+
+
+
+
+    //------Ejercicio N°12------//
+    /*const calcularNumeroPrimo = (numero = undefined) =>{
+
+    if(numero === undefined) return console.warn("Cuidado!! Olvidaste ingresar el numero a evaluar")
+    if(typeof numero !== "number") return console.error("El valor ingresado no es válido")
+    if(Math.sign(numero) === -1) return console.error("El numero no puede ser negativo")
+
+        for(let i = 2; i < numero; i++){
+            if(numero % i === 0){
+                return console.info(`El numero ${numero} no es primo`);
+            } 
+        }
+        return console.info(`El numero ${numero} es primo`)
+       }
+       calcularNumeroPrimo(13)
+       calcularNumeroPrimo("carlos")
+       calcularNumeroPrimo()
+       calcularNumeroPrimo(99)
+       calcularNumeroPrimo(-16)*/
+
+
+
+
+
+    //------Ejercicio N°13------//
+    /*const parOImpar = (numero = undefined) =>{
+    if(numero === undefined) return console.warn("Cuidado!! Olvidaste ingresar el numero a evaluar")
+    if(typeof numero !== "number") return console.error("El valor ingresado no es válido")
+
+    if(numero % 2 === 0){
+        return console.info(`El numero ${numero} es par`)
+    }else{
+        return console.info(`El numero ${numero} es inpar`)
+    }
+    
+    }
+
+    parOImpar(-55)
+    parOImpar(0)
+    parOImpar(29718538)
+    parOImpar()
+    parOImpar([])*/
+
+
+
+
+
+    //------Ejercicio N°13------//
+    /*const calcularTemperatura = (temperatura = undefined, tipoDeTemperatura = undefined) =>{
+        if(temperatura === undefined) return console.warn("No ingresaste la temperatura a convertir")
+        if(typeof temperatura !== "number") return console.error(`El valor ${temperatura} ingresado, NO es un número`)
+        if(tipoDeTemperatura === undefined) return console.warn("No ingresaste el tipo de grado a convertir")
+        if(typeof tipoDeTemperatura !== "string") return console.error(`El valor ${tipoDeTemperatura} ingresado, NO es una cadena de texto`)
+        if(tipoDeTemperatura.length !== 1 || !/C|F/.test(tipoDeTemperatura)) return console.warn("Valor de unidad no reconocido") 
+        let temperaturaCelcius = 0,
+        temperaturaFahrenheit = 0
+        
+        
+        if(tipoDeTemperatura === "C"){
+            temperaturaFahrenheit = (temperatura * 9/5) + 32;
+            return console.info(`La temperatura ingresada equivale a ${temperaturaFahrenheit}°F`)            
+        }else{
+            temperaturaCelcius = (temperatura - 32) * 5/9;
+            return console.info(`La temperatura ingresada equivale a ${temperaturaCelcius}°C`)  
+        }
+        
+        
+
+    }
+    calcularTemperatura()
+    calcularTemperatura("2")
+    calcularTemperatura(2, true)
+    calcularTemperatura(2, "hola")
+    calcularTemperatura(2, "E")
+    calcularTemperatura(0, "C")
+    calcularTemperatura(2, "F")
+    calcularTemperatura(0, "c")
+    calcularTemperatura(2, "f")*/
+
+    
+   
+
+   /* const calcularEdad = (dateString) =>{
+        let hoy = new Date();
+        let fechaDeNacimiento = new Date(dateString);
+        let edad = hoy.getFullYear() - fechaDeNacimiento.getFullYear();
+        let diferenciaMeses = hoy.getMonth() - fechaDeNacimiento.getMonth();
+        if(diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < fechaDeNacimiento.getDate())){
+            edad--;
+        }
+        return console.info(`Naciste el ${fechaDeNacimiento.toLocaleDateString()} tienes ${edad} años`)
+    }
+    let miCumpleaños = new Date("September 14, 1982")
+    calcularEdad(miCumpleaños)*/
+
+    
+    
+
+    //-----PRIMER USO DE CALLBACK-----//
+    /*const cuadradoCallback = (value, callback) => {
+        setTimeout(() =>{
+            callback(value, value * value);    
+        },0|Math.random() * 2000);
+    }
+    cuadradoCallback(0,(value, result) =>{
+        console.log("Comienzo de callback");
+        console.log(`El valor ${value} elevado al cuadrado da por resultado ${result}`);
+        cuadradoCallback(1,(value, result) =>{
+            console.log(`El valor ${value} elevado al cuadrado da por resultado ${result}`);
+            cuadradoCallback(2,(value, result) =>{
+                console.log(`El valor ${value} elevado al cuadrado da por resultado ${result}`);
+                cuadradoCallback(3,(value, result) =>{
+                    console.log(`El valor ${value} elevado al cuadrado da por resultado ${result}`);
+                    cuadradoCallback(4,(value, result) =>{
+                        console.log(`El valor ${value} elevado al cuadrado da por resultado ${result}`);
+                        cuadradoCallback(5,(value, result) =>{
+                            console.log(`El valor ${value} elevado al cuadrado da por resultado ${result}`);    
+                        })   
+                    }) 
+                })      
+            })  
+        })    
+    })*/
+
+
+
+
+
+    //-----PRIMER USO DE PROMICE-----//
+
+    /*const cuadradoPromise = value =>{
+        if(typeof value !== "number"){
+            return Promise.reject(`El parametro ${value} no es valido`)
+        }
+        return new Promise((resolve,rejet) =>{
+            setTimeout(() =>{
+                resolve({
+                    value,
+                    result: value * value
+                });
+            }, 0|Math.random() * 1000)
+
+        });
+    }
+    cuadradoPromise(0)
+    .then((caca) =>{
+        //console.log(caca)
+        console.log(`Promise ${caca.value}, al cuadrado ${caca.result}`);
+        return cuadradoPromise(1);
+    })
+    .then((caca) =>{
+        //console.log(caca)
+        console.log(`Promise ${caca.value}, al cuadrado ${caca.result}`);
+        return cuadradoPromise(2);
+    })
+    .then((caca) =>{
+        //console.log(caca)
+        console.log(`Promise ${caca.value}, al cuadrado ${caca.result}`);
+        return cuadradoPromise("s");
+    })
+    .then((caca) =>{
+        //console.log(caca)
+        console.log(`Promise ${caca.value}, al cuadrado ${caca.result}`);
+        return cuadradoPromise(4);
+    })
+    .then((caca) =>{
+        //console.log(caca)
+        console.log(`Promise ${caca.value}, al cuadrado ${caca.result}`);
+        return cuadradoPromise(5);
+    })
+    .then((caca) =>{
+        //console.log(caca)
+        console.log(`Promise ${caca.value}, al cuadrado ${caca.result}`);
+        console.log("Fin del Promise")
+    })
+    .catch((err) => console.error(err));*/
+
+
+
+
+    
+    //-----PRIMER USO DE PROMICE-----//
+   /* const cuadradoPromise = value =>{
+        if(typeof value !== "number"){
+            return Promise.reject(`El parametro ${value} no es valido`)
+        }
+        return new Promise((resolve,rejet) =>{
+            setTimeout(() =>{
+                resolve({
+                    value,
+                    result: value * value
+                });
+            }, 0|Math.random() * 1000)
+
+        });
+    }*/
+
+    /*async function funcionAsyncDeclarada(){
+        try{
+            console.log(`Comienso Async Function`)
+            let obj = await cuadradoPromise(6);
+            console.log(`Async Function: ${obj.value}, ${obj.result}`)
+
+            obj =  await cuadradoPromise(7);
+            console.log(`Async Function: ${obj.value}, ${obj.result}`)
+
+            obj = await cuadradoPromise(8);
+            console.log(`Async Function: ${obj.value}, ${obj.result}`)
+
+            obj = await cuadradoPromise(9);
+            console.log(`Async Function: ${obj.value}, ${obj.result}`)
+
+            obj = await cuadradoPromise(10);
+            console.log(`Async Function: ${obj.value}, ${obj.result}`)
+
+        }catch(err){
+            console.log(err)
+
+        }
+    }
+    funcionAsyncDeclarada();*/
+
+    /*const arr1 = [1, 2, 3, 4, 5];
+    const arr2 = [6, 7, 8, 9, 10];
+    const obj1 = {
+        nombre: "Sebastian",
+        apellido: "Parrondo",
+        edad: 39
+    }
+
+    console.log(arr1)
+    console.log(arr2)
+
+    const [, ,...arr3] = arr1
+    console.log(arr3)
+    console.log(obj1)
+    for(let obj of obj1){
+        console.log(obj.nombre)
+    }*/
+
+    /*const obj = {
+        nombre: "Sebastián",
+        Apellido: "Parrondo",
+        edad: 39
+    }
+    const {a,b,c} = obj;
+    console.log(a)*/
+
+    /*const arr = ["River", "Boca", "Independiente", "San Lorenzo", "Racing"];
+    const objUsuario = {}
+
+    arr.forEach((e,index) => objUsuario[`id_${index}`] = e);
+    console.log(objUsuario)*/
+
+    const btn = document.querySelector(".btn-js")
+
+    btn.addEventListener("click", (e) =>{
+        let texto = "vamos a hacer un pipi??"
+
+    const hablar = (texto) => {
+        speechSynthesis.speak(new SpeechSynthesisUtterance(texto));
+    }
+    hablar(texto);
+
+    })
+
+    
+
+    </script>
+    
+    
+    
+    
+</body>
+</html>
